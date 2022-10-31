@@ -19,9 +19,7 @@
 		"start": "http-server",
 		"test": "exit 0"
 	},
-	"dependencies": {
-		"es-module-shims": "^1.6.2"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"http-server": "^14.1.1",
 		"importly": "^0.2.0",
