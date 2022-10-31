@@ -10,7 +10,7 @@ export class SwipeSnail extends HTMLElement {
 
 		const snail = swipeSnail({
 			system: this,
-			panels: this.querySelectorAll("swipe-panel"),
+			panels: this.querySelectorAll("snail-panel"),
 			onPanelChange: panel => {
 				this.dispatchEvent(new PanelChangeEvent(panel))
 			}
