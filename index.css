@@ -43,7 +43,6 @@ snail-panel {
 	width: 100vw;
 	height: 100vh;
 	text-align: center;
-	flex-direction: column;
 	vertical-align:top;
 	align-items: center;
 	justify-content: center;
