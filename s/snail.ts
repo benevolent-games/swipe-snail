@@ -63,7 +63,6 @@ export function swipeSnail(options: SnailOptions) {
 				if (!startSwiping) {
 					startSwiping = true
 					system.style.overflowX = "scroll"
-					// console.log(system.style.overflowX)
 				}
 				
 			}
@@ -80,27 +79,24 @@ export function swipeSnail(options: SnailOptions) {
 	})
 
 	system.addEventListener("touchmove", e => {
-		// console.log(Math.abs(startX - e.touches[0].clientX))
 		if (!touchUp) {
 			if (Math.abs(startX - e.touches[0].clientX) >= 30) {
-				// console.log("SWIPE")
-				// console.log(system.style.overflowX)
 				if (!startSwiping) {
+					system.style.overflowX = "scroll"
 					startSwiping = true
-					// system.style.overflowX = "scroll"
 				}
 				
 			}
 		}
-		if (!isDown) return
+		if (touchUp) return
 
 		e.preventDefault() //stop any weird stuff
 
 		const x = e.touches[0].pageX - system.offsetLeft
 		const deviation = x - startX
-		
+		if (startSwiping) {
 			system.scrollLeft = scrollLeft - deviation
-		
+		}
 	})
 
 
@@ -113,10 +109,10 @@ export function swipeSnail(options: SnailOptions) {
 			top: 0,
 			left: coordinates,
 			behavior: 'smooth'
-		})
+			})
 		}
-		// startSwiping = false
-		// system.style.overflowX = "hidden"
+		system.style.overflowX = "hidden"
+		startSwiping = false	
 		system.removeAttribute("data-grabbed")
 	})
 
@@ -141,7 +137,7 @@ export function swipeSnail(options: SnailOptions) {
 			})
 			}
 			isScrolling = false
-			// system.style.overflowX = "hidden"
+			system.style.overflowX = "hidden"
 		}, 66)
 
 	}, false)
