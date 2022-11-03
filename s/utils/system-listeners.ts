@@ -1,15 +1,18 @@
 
+import {calculateDeadzone} from "./calculate-deadzone.js"
+import {calculateSwipeMovement} from "./calculate-swipe-movement.js"
 import {State} from "./initialize-state.js"
 
 export function prepareSystemListeners(system: HTMLElement, state: State) {
 	return {
 
 		mousedown(event: MouseEvent) {
-			let pageX = event.pageX
+			// init mouse position
+			state.startX = event.pageX - system.offsetLeft
+			state.scrollLeft = system.scrollLeft
+
 			state.isDown = true
 			system.setAttribute("data-grabbed", "")
-			state.startX = pageX - system.offsetLeft
-			state.scrollLeft = system.scrollLeft
 		},
 
 		mouseleave(event: MouseEvent) {
@@ -29,44 +32,17 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 		},
 
 		mousemove(event: MouseEvent) {
-			if (state.isDown) {
-				if (Math.abs(state.startX - event.clientX) >= 30) {
-					if (!state.startSwiping) {
-						state.startSwiping = true
-						system.style.overflowX = "scroll"
-					}
-				}
-			}
+			event.preventDefault()
 			if (!state.isDown) return
-	
-			event.preventDefault() //stop any weird stuff
-	
-			const x = event.pageX - system.offsetLeft
-			const deviation = x - state.startX
-			if (state.startSwiping) {
-				system.scrollLeft = state.scrollLeft - deviation
-			}
+			calculateDeadzone(system, event, state)
+			calculateSwipeMovement(system, event, state)
 		},
 
 		touchmove(event: TouchEvent) {
-			if (!state.touchUp) {
-				if (Math.abs(state.startX - event.touches[0].clientX) >= 30) {
-					if (!state.startSwiping) {
-						system.style.overflowX = "scroll"
-						state.startSwiping = true
-					}
-					
-				}
-			}
+			event.preventDefault()
 			if (state.touchUp) return
-	
-			event.preventDefault() //stop any weird stuff
-	
-			const x = event.touches[0].pageX - system.offsetLeft
-			const deviation = x - state.startX
-			if (state.startSwiping) {
-				system.scrollLeft = state.scrollLeft - deviation
-			}
+			calculateDeadzone(system, event, state)
+			calculateSwipeMovement(system, event, state)
 		},
 
 		touchend(event: TouchEvent) {
