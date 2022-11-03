@@ -4,10 +4,36 @@ import {PanelChangeEvent} from "../events/panel-change.js"
 
 export class SwipeSnail extends HTMLElement {
 	go: (panel: HTMLElement) => Promise<void>
+	shadow = this.attachShadow({
+		mode: "open",
+		delegatesFocus: false,
+		slotAssignment: "named",
+	})
 
 	constructor() {
 		super()
-
+		this.shadow.innerHTML = `
+			<style>
+			:host { 
+				width: 100%;
+				display: block;
+				text-align: center;
+				overflow-x: scroll;
+				overflow-y: hidden;
+				white-space: nowrap;
+				user-select: none;
+				cursor: pointer;
+				/* im not sure if these two under are needed*/
+				transition: all 0.2s;
+				will-change: transform;
+			}
+			:host-context([data-grabbed]) {
+				cursor: grabbing;
+				cursor: -webkit-grabbing;
+			}
+			</style>
+			<slot></slot>
+		`
 		const snail = swipeSnail({
 			system: this,
 			panels: this.querySelectorAll("snail-panel"),
