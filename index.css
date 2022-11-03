@@ -13,64 +13,10 @@ html {
 	color: whitesmoke;
 }
 
-body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-}
-
 h1 {
 	font-size: 5em;
 	text-align: center;
 	margin-top: 1em;
 }
 
-swipe-snail {
-	text-align: center;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	white-space: nowrap;
-	user-select: none;
-	cursor: pointer;
-	/* im not sure if these two under are needed*/
-	transition: all 0.2s;
-	will-change: transform;
-}
 
-snail-panel {
-	display: inline-flex;
-	width: 100vw;
-	height: 100vh;
-	text-align: center;
-	vertical-align:top;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-	box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.15);
-	overflow: auto;
-	padding: 1em;
-}
-
-swipe-snail.active {
-	cursor: grabbing;
-	cursor: -webkit-grabbing;
-}
-
-::-webkit-scrollbar {
-	width: 10px;
-	height: 0px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-* {
-	word-break: break-all;
-	white-space: normal;
-}
