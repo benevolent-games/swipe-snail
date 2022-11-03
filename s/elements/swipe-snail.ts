@@ -18,7 +18,7 @@ export class SwipeSnail extends HTMLElement {
 				width: 100%;
 				display: block;
 				text-align: center;
-				overflow-x: scroll;
+				overflow-x: hidden;
 				overflow-y: hidden;
 				white-space: nowrap;
 				user-select: none;
@@ -40,6 +40,9 @@ export class SwipeSnail extends HTMLElement {
 			}
 			:host::-webkit-scrollbar-thumb {
 				background: #888; 
+			}
+			:host-context([data-swipable]) {
+				overflow-x: scroll;
 			}
 			</style>
 			<slot></slot>

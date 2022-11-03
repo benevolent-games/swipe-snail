@@ -2,8 +2,10 @@
 import {calculateDeadzone} from "./calculate-deadzone.js"
 import {calculateSwipeMovement} from "./calculate-swipe-movement.js"
 import {State} from "./initialize-state.js"
+import {scrollIntoViewAfterScrollEventEnds} from "./scrollintoview-after-scroll-event-ends.js"
 
 export function prepareSystemListeners(system: HTMLElement, state: State) {
+
 	return {
 
 		mousedown(event: MouseEvent) {
@@ -26,8 +28,7 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 				behavior: "smooth"
 			})
 			state.isDown = false
-			state.startSwiping = false
-			system.style.overflowX = "hidden"
+			system.removeAttribute("data-swipable")
 			system.removeAttribute("data-grabbed")
 		},
 
@@ -40,7 +41,7 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 
 		touchmove(event: TouchEvent) {
 			event.preventDefault()
-			if (state.touchUp) return
+			if (!state.isDown) return
 			calculateDeadzone(system, event, state)
 			calculateSwipeMovement(system, event, state)
 		},
@@ -48,7 +49,6 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 		touchend(event: TouchEvent) {
 			const observedSection = document.querySelector("[data-observed]")!
 			const coordinates = observedSection.getBoundingClientRect().x
-			state.touchUp = true
 			if (!state.isScrolling) {
 				system.scrollBy({
 				top: 0,
@@ -56,35 +56,19 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 				behavior: 'smooth'
 				})
 			}
-			system.style.overflowX = "hidden"
-			state.startSwiping = false	
+			state.isDown = false
+			system.removeAttribute("data-swipable")
 			system.removeAttribute("data-grabbed")
 		},
 
 		touchstart(event: TouchEvent) {
+			state.isDown = true
 			system.setAttribute("data-grabbed", "")
-			state.touchUp = false
 		},
 
-		// after scroll event (swiping) ends, scroll into observed view
-		// this thing is needed for mobiles where scrolling works differently to avoid
-		// weird stuff happening before the scroll event ends
 		scroll(event: Event) {
-
-			// Clear our timeout throughout the scroll
 			window.clearTimeout(state.isScrolling)
-
-			// Set a timeout to run after scrolling ends
-			state.isScrolling = setTimeout(() => {
-				if (state.touchUp && !state.isDown) {
-					const observedSection = document.querySelector("[data-observed]")
-					observedSection?.scrollIntoView({
-						behavior: "smooth",
-					})
-				}
-				state.isScrolling = false
-				system.style.overflowX = "hidden"
-			}, 66)
+			state.isScrolling = scrollIntoViewAfterScrollEventEnds(system, state)
 		},
 	}
 }

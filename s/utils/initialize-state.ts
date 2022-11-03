@@ -6,12 +6,25 @@ export function initializeState() {
 	const state = {
 		currentPanel: <HTMLElement | undefined>undefined,
 		isDown: false,
-		touchUp: false,
 		startX: 0,
 		scrollLeft: 0,
-		startSwiping: false,
 		isScrolling: <any>undefined,
 	}
-
+	const stateActions = {
+		initMousePostion(system: HTMLElement, event: MouseEvent) {
+			state.startX = event.pageX - system.offsetLeft
+			state.scrollLeft = system.scrollLeft
+		},
+		// stopSwiping(system: HTMLElement) {
+		// 	state.startSwiping = false
+		// 	system.style.overflowX = "hidden"
+		// 	system.removeAttribute("data-grabbed")
+		// },
+		// onTouchUp(system: HTMLElement) {
+		// 	system.style.overflowX = "hidden"
+		// 	state.startSwiping = false	
+		// 	system.removeAttribute("data-grabbed")
+		// }
+	}
 	return state
 }
