@@ -34,7 +34,7 @@ export class SwipeSnail extends HTMLElement {
 			:host::-webkit-scrollbar {
 				width: 10px;
 				height: 0px;
-			})
+			}
 			:host::-webkit-scrollbar-track {
   			background: #f1f1f1; 
 			}
