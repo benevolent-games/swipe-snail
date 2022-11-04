@@ -7,8 +7,10 @@ export function animatePanelsOpacity(
 	const thresholds = Array(100).fill(0).map((n, i) => n + i/100)
 	const observer = new IntersectionObserver(
 		entries => {
-			entries.forEach((entry:any) => {
+			entries.forEach((entry: any) => {
+				if (entry.target.hasAttribute("crossfade")) {
 					entry.target.style.opacity = entry.intersectionRatio
+				}
 			})
 		},
 		{
