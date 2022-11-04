@@ -14,8 +14,8 @@ export default css`
 	box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.15);
 	overflow: auto;
 	padding: 1em;
-	word-break: break-all;
 	white-space: normal;
+	overflow: overlay;
 }
 
 :host::-webkit-scrollbar {
