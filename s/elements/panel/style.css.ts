@@ -11,11 +11,14 @@ export default css`
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.15);
 	overflow: auto;
 	padding: 1em;
 	white-space: normal;
 	overflow: overlay;
+}
+
+:host-context([border]) {
+	box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
 :host::-webkit-scrollbar {
