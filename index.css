@@ -7,6 +7,10 @@
 	box-sizing: border-box;
 }
 
+:not(:defined) {
+	display: none;
+}
+
 html {
 	font-family: "Gentium Book Basic", serif;
 	background: #19202b;
@@ -17,4 +21,9 @@ h1 {
 	font-size: 5em;
 	text-align: center;
 	margin-top: 1em;
+}
+
+p {
+	margin-top: 2em;
+	max-width: 40em;
 }

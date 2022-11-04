@@ -1,6 +1,6 @@
 
-import {SwipeSnail} from "./elements/swipe-snail.js"
-import {SnailPanel} from "./elements/snail-panel.js"
+import {SnailSystem} from "./elements/system/element.js"
+import {SnailPanel} from "./elements/panel/element.js"
 
-customElements.define("swipe-snail", SwipeSnail)
+customElements.define("snail-system", SnailSystem)
 customElements.define("snail-panel", SnailPanel)
