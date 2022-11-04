@@ -31,6 +31,16 @@ export class SwipeSnail extends HTMLElement {
 				cursor: grabbing;
 				cursor: -webkit-grabbing;
 			}
+			:host::-webkit-scrollbar {
+				width: 10px;
+				height: 0px;
+			})
+			:host::-webkit-scrollbar-track {
+  			background: #f1f1f1; 
+			}
+			:host::-webkit-scrollbar-thumb {
+				background: #888; 
+			}
 			</style>
 			<slot></slot>
 		`
