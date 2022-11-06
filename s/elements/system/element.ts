@@ -1,8 +1,8 @@
 
 import styleCss from "./style.css.js"
-import {swipeSnail} from "../../snail.js"
 import {noop as html} from "../../utils/template-noop.js"
 import {PanelChangeEvent} from "../../events/panel-change.js"
+import {setupSnailBehavior} from "../../setup-snail-behavior.js"
 
 export class SnailSystem extends HTMLElement {
 
@@ -11,6 +11,7 @@ export class SnailSystem extends HTMLElement {
 	}
 
 	go: (panel: HTMLElement) => Promise<void>
+	goInstantly: (panel: HTMLElement) => void
 
 	shadow = this.attachShadow({
 		mode: "open",
@@ -26,7 +27,7 @@ export class SnailSystem extends HTMLElement {
 			<slot></slot>
 		`
 
-		const snail = swipeSnail({
+		const snail = setupSnailBehavior({
 			system: this,
 			panels: this.querySelectorAll("snail-panel"),
 			onPanelChange: panel => {
@@ -35,5 +36,6 @@ export class SnailSystem extends HTMLElement {
 		})
 
 		this.go = snail.go
+		this.goInstantly = snail.goInstantly
 	}
 }

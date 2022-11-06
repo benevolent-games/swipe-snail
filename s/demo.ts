@@ -16,10 +16,17 @@ const elements = {
 	},
 }
 
+let routingCount = 0
+
 function openPanel(hash: string) {
+	const currentCount = routingCount++
 	const panel = elements.snail.getPanel(hash)
-	if (panel)
-		elements.snail.system.go(panel)
+	if (panel) {
+		if (currentCount === 0)
+			elements.snail.system.goInstantly(panel)
+		else
+			elements.snail.system.go(panel)
+	}
 	else
 		console.error(`unknown route: "${hash}"`)
 }

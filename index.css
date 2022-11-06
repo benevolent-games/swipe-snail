@@ -24,7 +24,6 @@ html, body, snail-system, snail-panel {
 h1 {
 	font-size: 5em;
 	text-align: center;
-	margin-top: 1em;
 }
 
 p {
@@ -37,10 +36,6 @@ nav a {
 	display: block;
 }
 
-snail-system {
-	border: 1px solid #f004;
-}
-
 snail-panel {
-	border: 1px solid #0f04;
+	padding: 1em;
 }
