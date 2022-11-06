@@ -1,13 +1,4 @@
 
-export class PanelChangeEvent extends CustomEvent<HTMLElement> {
-	static eventName = "snail_panel_change"
+import {makeEventClass} from "../utils/make-event-class.js"
 
-	constructor(panel: HTMLElement) {
-		super(PanelChangeEvent.eventName, {
-			bubbles: true,
-			cancelable: true,
-			composed: true,
-			detail: panel,
-		})
-	}
-}
+export const PanelChangeEvent = makeEventClass<HTMLElement>("snail_panel_change")

@@ -2,18 +2,21 @@
 import {noop as css} from "../../utils/template-noop.js"
 export default css`
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 :host {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: stretch;
 	width: 100%;
-	display: block;
-	text-align: center;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	white-space: nowrap;
-	user-select: none;
+	height: 100%;
+	overflow: hidden;
 	cursor: pointer;
-	/* im not sure if these two under are needed*/
-	transition: all 0.2s;
-	will-change: transform;
 }
 
 :host-context([data-grabbed]) {
@@ -27,11 +30,11 @@ export default css`
 }
 
 :host::-webkit-scrollbar-track {
-	background: #f1f1f1; 
+	background: #f1f1f1;
 }
 
 :host::-webkit-scrollbar-thumb {
-	background: #888; 
+	background: #888;
 }
 
 :host-context([data-swipable]) {

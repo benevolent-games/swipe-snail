@@ -13,10 +13,10 @@ export function swipeSnail(options: SnailOptions) {
 	const panels = Array.from(options.panels)
 
 	const state = initializeState()
-	const home = getHomePanel(panels)
+	// const home = getHomePanel(panels)
 
-	if (home)
-		home.scrollIntoView()
+	// if (home)
+	// 	home.scrollIntoView()
 
 	observePanels(
 		system,
@@ -31,9 +31,7 @@ export function swipeSnail(options: SnailOptions) {
 
 	return {
 		async go(panel: HTMLElement) {
-			panel.scrollIntoView({
-				behavior: "smooth",
-			})
+			panel.scrollIntoView({behavior: "smooth"})
 		},
 		dispose() {
 			stopListeners()

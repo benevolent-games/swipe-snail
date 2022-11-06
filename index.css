@@ -17,6 +17,10 @@ html {
 	color: whitesmoke;
 }
 
+html, body, snail-system, snail-panel {
+	height: 100%;
+}
+
 h1 {
 	font-size: 5em;
 	text-align: center;
@@ -26,4 +30,17 @@ h1 {
 p {
 	margin-top: 2em;
 	max-width: 40em;
+}
+
+nav a {
+	padding-left: 1em;
+	display: block;
+}
+
+snail-system {
+	border: 1px solid #f004;
+}
+
+snail-panel {
+	border: 1px solid #0f04;
 }

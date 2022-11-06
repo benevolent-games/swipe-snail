@@ -1,6 +1,6 @@
 
-import {noop as html} from "../../utils/template-noop.js"
 import styleCss from "./style.css.js"
+import {noop as html} from "../../utils/template-noop.js"
 
 export class SnailPanel extends HTMLElement {
 
