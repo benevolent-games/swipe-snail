@@ -10,7 +10,6 @@ import {setCurrentPanelBasedOnIntersection} from "./utils/set-current-panel-base
 export function setupSnailBehavior(options: SnailOptions) {
 	const {system, onPanelChange} = options
 	const panels = Array.from(options.panels)
-
 	const state = initializeState()
 
 	observePanels(

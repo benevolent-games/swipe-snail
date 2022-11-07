@@ -1,40 +1,26 @@
 
-export function hashrouter<R extends {
-		[route: string]: (hash: string) => (void | (() => void))
-	}>(routesSpec: R) {
+export function hashrouter(onChange: (route: string, count: number) => void) {
 
-	const routes = new Map(Object.entries(routesSpec))
-	const cleanups = new Set<() => void>()
+	let count = 0
 
 	function hashchange() {
-		let {hash} = location
-
-		if (hash === "" || hash === "#")
-			hash = "#/"
-	
-		const route = routes.get(hash)
-
-		if (route) {
-			for (const clean of cleanups)
-				clean()
-			cleanups.clear()
-			const cleanup = route(hash) ?? (() => {})
-			cleanups.add(cleanup)
-		}
-		else
-			console.error(`route "${hash}" not found`)
+		const {hash} = location
+		const route = (hash === "" || hash === "#")
+			? "#/"
+			: hash
+		onChange(route, count++)
 	}
+
+	window.addEventListener("hashchange", hashchange)
+	requestAnimationFrame(hashchange)
 
 	return {
 		hashchange,
-		get goto() {
-			return <{[P in keyof R]: () => void}>new Proxy({}, {
-				get(t, p: string) {
-					return () => {
-						history.pushState({}, "", p)
-					}
-				},
-			})
+		update(route: string) {
+			history.pushState({}, "", route)
+		},
+		dispose() {
+			window.removeEventListener("hashchange", hashchange)
 		},
 	}
 }

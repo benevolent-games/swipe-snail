@@ -16,26 +16,24 @@ const elements = {
 	},
 }
 
-let routingCount = 0
-
-function openPanel(hash: string) {
-	const currentCount = routingCount++
-	const panel = elements.snail.getPanel(hash)
+const router = hashrouter((route, count) => {
+	const panel = elements.snail.getPanel(route)
 	if (panel) {
-		if (currentCount === 0)
+		if (count === 0)
 			elements.snail.system.goInstantly(panel)
 		else
 			elements.snail.system.go(panel)
 	}
 	else
-		console.error(`unknown route: "${hash}"`)
-}
-
-const router = hashrouter({
-	"#/": openPanel,
-	"#/left": openPanel,
-	"#/right": openPanel,
+		console.error(`unknown route: "${route}"`)
 })
 
-window.addEventListener("hashchange", router.hashchange)
-requestAnimationFrame(router.hashchange)
+SnailSystem
+	.events
+	.PanelChangeEvent
+		.listen(elements.snail.system)
+		.handle(event => {
+			const panel = event.detail
+			const route = panel.getAttribute("data-route")!
+			router.update(route)
+		})
