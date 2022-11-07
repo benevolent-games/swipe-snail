@@ -1,6 +1,6 @@
 {
 	"name": "@benev/swipe-snail",
-	"version": "0.0.0-dev.0",
+	"version": "0.0.0",
 	"description": "fastest swipe system known to man",
 	"license": "MIT",
 	"author": "Chase Moskal <chasemoskal@gmail.com>",
