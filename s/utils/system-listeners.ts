@@ -40,7 +40,6 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 		},
 
 		touchmove(event: TouchEvent) {
-			event.preventDefault()
 			if (!state.isDown) return
 			calculateDeadzone(system, event, state)
 			calculateSwipeMovement(system, event, state)
