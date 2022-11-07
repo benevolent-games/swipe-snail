@@ -13,20 +13,22 @@ export default css`
 	flex: 0 0 100%;
 	width: 100%;
 	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
 	overflow-y: overlay;
 }
 
 :host::-webkit-scrollbar {
-	width: 10px;
+	width: var(--snail-scrollbar-width, 4px);
 	height: 0px;
 }
 
 :host::-webkit-scrollbar-track {
-	background: #f1f1f1; 
+	background: var(--snail-scrollbar-track, #0000);
 }
 
 :host::-webkit-scrollbar-thumb {
-	background: #888; 
+	background: var(--snail-scrollbar-thumb, #fff8);
 }
 
 `
