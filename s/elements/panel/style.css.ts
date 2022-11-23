@@ -16,6 +16,7 @@ export default css`
 	overflow-x: hidden;
 	overflow-y: auto;
 	overflow-y: overlay;
+	touch-action: none;
 }
 
 :host::-webkit-scrollbar {

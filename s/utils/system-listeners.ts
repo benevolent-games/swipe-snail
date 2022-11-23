@@ -8,8 +8,8 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 
 	return {
 
-		mousedown(event: MouseEvent) {
-			// init mouse position
+		pointerdown(event: PointerEvent) {
+			// init pointer position
 			state.startX = event.pageX - system.offsetLeft
 			state.scrollLeft = system.scrollLeft
 
@@ -17,12 +17,12 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 			system.setAttribute("data-grabbed", "")
 		},
 
-		mouseleave(event: MouseEvent) {
+		pointerleave(event: PointerEvent) {
 			state.isDown = false
 			system.removeAttribute("data-grabbed")
 		},
 
-		mouseup(event: MouseEvent) {
+		pointerup(event: PointerEvent) {
 			const observedSection = document.querySelector("[data-observed]")
 			observedSection?.scrollIntoView({
 				behavior: "smooth"
@@ -32,37 +32,11 @@ export function prepareSystemListeners(system: HTMLElement, state: State) {
 			system.removeAttribute("data-grabbed")
 		},
 
-		mousemove(event: MouseEvent) {
+		pointermove(event: PointerEvent) {
 			event.preventDefault()
 			if (!state.isDown) return
 			calculateDeadzone(system, event, state)
 			calculateSwipeMovement(system, event, state)
-		},
-
-		touchmove(event: TouchEvent) {
-			if (!state.isDown) return
-			calculateDeadzone(system, event, state)
-			calculateSwipeMovement(system, event, state)
-		},
-
-		touchend(event: TouchEvent) {
-			const observedSection = document.querySelector("[data-observed]")!
-			const coordinates = observedSection.getBoundingClientRect().x
-			if (!state.isScrolling) {
-				system.scrollBy({
-				top: 0,
-				left: coordinates,
-				behavior: 'smooth'
-				})
-			}
-			state.isDown = false
-			system.removeAttribute("data-swipable")
-			system.removeAttribute("data-grabbed")
-		},
-
-		touchstart(event: TouchEvent) {
-			state.isDown = true
-			system.setAttribute("data-grabbed", "")
 		},
 
 		scroll(event: Event) {
