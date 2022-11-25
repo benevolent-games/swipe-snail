@@ -1,6 +1,6 @@
 {
 	"name": "@benev/swipe-snail",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "fastest swipe system known to man",
 	"license": "MIT",
 	"author": "Chase Moskal <chasemoskal@gmail.com>",
@@ -19,14 +19,13 @@
 		"start": "http-server",
 		"test": "exit 0"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"http-server": "^14.1.1",
 		"importly": "^0.2.0",
 		"mkdirp": "^1.0.4",
 		"npm-run-all": "^4.1.5",
 		"rimraf": "^3.0.2",
-		"typescript": "^4.8.4"
+		"typescript": "^4.9.3"
 	},
 	"keywords": [
 		"swipe",
