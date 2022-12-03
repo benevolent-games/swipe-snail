@@ -26,6 +26,8 @@ const router = hashrouter((route, count) => {
 		console.error(`unknown route: "${route}"`)
 })
 
+router.hashchange()
+
 SnailSystem
 	.events
 	.PanelChangeEvent

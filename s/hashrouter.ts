@@ -12,7 +12,6 @@ export function hashrouter(onChange: (route: string, count: number) => void) {
 	}
 
 	window.addEventListener("hashchange", hashchange)
-	requestAnimationFrame(hashchange)
 
 	return {
 		hashchange,
