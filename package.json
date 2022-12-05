@@ -1,0 +1,44 @@
+{
+	"name": "@benev/swipe-snail",
+	"version": "0.0.4",
+	"description": "fastest swipe system known to man",
+	"license": "MIT",
+	"author": "Chase Moskal <chasemoskal@gmail.com>",
+	"type": "module",
+	"files": [
+		"x",
+		"s"
+	],
+	"scripts": {
+		"build": "run-s clean && run-p compile importly",
+		"dev": "run-p start watch",
+		"clean": "rimraf x && mkdirp x",
+		"compile": "tsc",
+		"importly": "importly < package-lock.json > x/importmap.json",
+		"watch": "tsc -w",
+		"start": "http-server",
+		"test": "exit 0"
+	},
+	"devDependencies": {
+		"http-server": "^14.1.1",
+		"importly": "^0.2.0",
+		"mkdirp": "^1.0.4",
+		"npm-run-all": "^4.1.5",
+		"rimraf": "^3.0.2",
+		"typescript": "^4.9.3"
+	},
+	"keywords": [
+		"swipe",
+		"touch",
+		"mobile",
+		"carousel"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/benevolent-games/swipe-snail.git"
+	},
+	"bugs": {
+		"url": "https://github.com/benevolent-games/swipe-snail/issues"
+	},
+	"homepage": "https://github.com/benevolent-games/swipe-snail#readme"
+}
