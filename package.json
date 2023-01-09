@@ -13,18 +13,31 @@
 		"build": "run-s clean && run-p compile importly",
 		"dev": "run-p start watch",
 		"clean": "rimraf x && mkdirp x",
-		"compile": "tsc",
-		"importly": "importly < package-lock.json > x/importmap.json",
-		"watch": "tsc -w",
-		"start": "http-server",
+		"importly": "importly --host=node_modules < package-lock.json > x/importmap.json",
+		"links": "run-s link-s link-modules",
+		"link-s": "ln -s $(realpath s) x/s",
+		"link-modules": "ln -s $(realpath node_modules) x/node_modules",
+		"compile": "run-p links sass && run-s typescript web",
+		"typescript": "tsc",
+		"sass": "sass s/web/templates/:x/",
+		"web": "node x/web/build.js",
+		"watch-sass": "npm run sass -s -- --watch",
+		"watch-typescript": "tsc -w",
+		"watch": "run-p watch-sass watch-typescript watch-web",
+		"watch-web": "chokidar \"x/web/**/*\" -c \"npm run web -s && echo 'rebuilt web'\"",
+		"http": "http-server",
+		"start": "run-p http watch",
 		"test": "exit 0"
 	},
 	"devDependencies": {
+		"chokidar": "^3.5.3",
+		"chokidar-cli": "^3.0.0",
 		"http-server": "^14.1.1",
 		"importly": "^0.2.0",
 		"mkdirp": "^1.0.4",
 		"npm-run-all": "^4.1.5",
 		"rimraf": "^3.0.2",
+		"sass": "^1.57.1",
 		"typescript": "^4.9.3"
 	},
 	"keywords": [
@@ -40,5 +53,8 @@
 	"bugs": {
 		"url": "https://github.com/benevolent-games/swipe-snail/issues"
 	},
-	"homepage": "https://github.com/benevolent-games/swipe-snail#readme"
+	"homepage": "https://github.com/benevolent-games/swipe-snail#readme",
+	"dependencies": {
+		"xiome": "^0.0.33"
+	}
 }
