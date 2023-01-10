@@ -1,0 +1,65 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:not(:defined) {
+	display: none;
+}
+
+html {
+	font-family: "Gentium Book Basic", serif;
+	background: #19202b;
+	color: whitesmoke;
+}
+
+html, body, snail-system, snail-panel {
+	height: 100%;
+}
+
+[data-route] > * + * {
+	margin-top: 1rem;
+}
+
+h1 {
+	font-size: 5em;
+	text-align: center;
+}
+
+p {
+	max-width: 40em;
+}
+
+a { color: #8ffc; }
+a:visited { color: #8ffb; }
+a:is(:hover, :focus) { color: #8fff; }
+
+nav a {
+	padding-left: 1em;
+	display: block;
+	max-width: max-content;
+}
+
+blockquote {
+	opacity: 0.5;
+}
+
+blockquote > * + * {
+	margin-top: 0.6rem;
+}
+
+snail-panel {
+	padding: 1em;
+}
+
+snail-panel[data-route="#/left"] {
+	background: #2e1e35;
+}
+
+snail-panel[data-route="#/right"] {
+	background: #1e3526;
+}
