@@ -41,6 +41,12 @@ jobs:
         rm -rf node_modules
         npm ci --production
 
+    - name: 🗃️ copy files
+      run: |
+        rm -rf x/node_modules x/s
+        cp -r node_modules/ x/
+        cp -r s/ x/
+
     - name: ✍️ write cname and nojekyll
       run: |
         touch .nojekyll
@@ -50,5 +56,5 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         branch: gh-pages
-        folder: .
+        folder: x
         single-commit: true
