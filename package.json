@@ -25,7 +25,7 @@
 		"watch-typescript": "tsc -w",
 		"watch": "run-p watch-sass watch-typescript watch-web",
 		"watch-web": "chokidar \"x/web/**/*\" -c \"npm run web -s && echo 'rebuilt web'\"",
-		"http": "http-server",
+		"http": "http-server x",
 		"start": "run-p http watch",
 		"test": "exit 0"
 	},
